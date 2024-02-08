@@ -1,0 +1,17 @@
+<% if @customer.missing_payments?.any? %>
+  <div class="alert alert-warning mt-4 mb-3" role="alert">
+    <h4 class="alert-heading text-center">Customer's Outstanding Debts</h4>
+  </div>
+  <ul class="list-unstyled">
+    <% @customer.missing_payments?.each do |date| %>
+      <li class="d-flex justify-content-between py-2">
+        <span class="flex-grow-1"><%= date.strftime("%B %Y") %></span>
+        <%= form_with url: add_missing_payment_customer_payments_path(@customer), method: :post do |form| %>
+          <%= form.hidden_field :payment_date, value: date %>
+          <%= form.hidden_field :amount, value: @customer.subscription_fee %>
+          <%= number_to_currency(@customer.subscription_fee) %><%= form.submit 'Paid', class: "btn btn-success btn-sm ms-2" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

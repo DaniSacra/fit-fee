@@ -1,0 +1,20 @@
+<% if @payments.exists? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payments.each do |payment| %>
+        <tr>
+          <td><%= payment.payment_date.strftime("%B %d, %Y") %></td>
+          <td><%= number_to_currency(payment.amount) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No payments found.</p>
+<% end %>

@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Subscription Fee</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr id="<%= dom_id(customer) %>">
+        <td>
+          <%= link_to customer.name, customer_path(customer) %>
+          <% unless customer.up_to_date_with_payments? %>
+            <span class="ms-2 badge bg-danger">In Debt</span>
+          <% end %>
+        </td>
+        <td><%= number_to_currency(customer.subscription_fee) %></td>
+        <td>
+          <%= link_to 'Edit', edit_customer_path(customer), class: "btn btn-primary btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

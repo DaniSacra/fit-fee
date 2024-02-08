@@ -1,0 +1,9 @@
+<div class="container mt-4">
+  <h1 class="mb-3">Editing Customer</h1>
+
+  <%= render "form", customer: @customer %>
+
+  <div class="mt-3">
+    <%= button_to "Destroy this customer", @customer, method: :delete, form_class: "d-inline", class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+  </div>
+</div>

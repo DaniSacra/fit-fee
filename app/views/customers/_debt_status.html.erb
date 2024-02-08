@@ -1,0 +1,5 @@
+<% unless @customer.up_to_date_with_payments? %>
+  <div class="mt-3 alert alert-danger" role="alert">
+    Outstanding Debt
+  </div>
+<% end %>

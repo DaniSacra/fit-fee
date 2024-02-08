@@ -1,0 +1,9 @@
+<% if current_user.customers.count.zero? %>
+
+  <%= render "shared/welcome" %>
+
+<% else %>
+
+  <%= render "customers_debts_table" %>
+
+<% end %>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fit Fee - What matters</title>
+    <%= favicon_link_tag 'favicon.ico' %> <!-- Para arquivos .ico -->
+    <!-- Ou para outros formatos, como PNG -->
+    <%= favicon_link_tag 'favicon.png', rel: 'icon', type: 'image/png' %>
+      
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= render partial: "layouts/header" %>
+
+    <%= render partial: "layouts/notice" %>
+
+    <main class="container mt-4">
+      <%= yield %>
+    </main>
+
+  </body>
+
+</html>

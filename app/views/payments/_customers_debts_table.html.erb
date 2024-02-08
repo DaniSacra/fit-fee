@@ -1,0 +1,30 @@
+<% if @customers_with_debts.empty? %>
+  <div class="container mt-5 text-center">
+    <div class="bg-body-tertiary p-5 rounded">
+      <h1 class="display-4">Great News!</h1>
+      <p class="lead">You're all caught up with your payments. Now, you can focus on what truly matters - training with peace of mind and joy.</p>
+      <div class="mt-4 d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <%= link_to 'Add a new Customer', new_customer_path, class: "btn btn-lg btn-success rounded-pill" %>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <ul class="list-unstyled">
+    <% @customers_with_debts.each do |customer_with_debt| %>
+      <li class="mb-3">
+        <h3 class="text-center"><%= customer_with_debt[:customer].name %></h3>
+        <% customer_with_debt[:missing_payments].each do |payment| %>
+          <div class="d-flex justify-content-between align-items-center py-2">
+            <span><%= payment[:date].strftime("%B %Y") %></span>
+            <%= form_with url: add_missing_payment_customer_payments_path(customer_with_debt[:customer]), method: :post, class: "d-inline" do |form| %>
+              <%= form.hidden_field :payment_date, value: payment[:date] %>
+              <%= form.hidden_field :amount, value: payment[:amount] %>
+              <%= number_to_currency(payment[:amount]) %> <%= form.submit "Paid", class: "btn btn-success btn-sm" %>
+            <% end %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
