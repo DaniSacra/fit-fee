@@ -13,7 +13,6 @@
 # gem "pg"
 #
 default: &default
-  url: <%= ENV['DATABASE_URL'] %>
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
@@ -80,6 +79,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: fit_fee_production
   username: fit_fee
   password: <%= ENV["FIT_FEE_DATABASE_PASSWORD"] %>
