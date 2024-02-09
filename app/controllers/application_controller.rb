@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user
+  before_action :authenticate_user!
 
-  def current_user
-    User.first
+  def after_sign_in_path_for(resource)
+    payments_path
+  end
+
+  # Redireciona o usuário após cadastro
+  def after_sign_up_path_for(resource)
+    payments_path
   end
 end
