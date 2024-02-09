@@ -1,7 +1,7 @@
 databases:
   - name: fitfee
-    databaseName: fitfee
-    user: fitfee
+    databaseName: ff_v1_production
+    user: ff_v1
     plan: free
 
 services:
