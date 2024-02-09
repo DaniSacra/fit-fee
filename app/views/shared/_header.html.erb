@@ -1,18 +1,25 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg bg-white border-bottom" aria-label="Navigation">
     <div class="container-fluid">
-      <a class="navbar-brand" href="<%= root_path() %>">
-        <%= image_tag "fit_fee_logo.png", size: "34x34" %> Fit Fee
-      </a>
+
+      <% if user_signed_in? %>
+        <a class="navbar-brand" href="<%= payments_path() %>">
+          <%= image_tag "fit_fee_logo.png", size: "34x34" %> Fit Fee
+        </a>
+      <% else %>
+        <a class="navbar-brand" href="<%= root_path() %>">
+          <%= image_tag "fit_fee_logo.png", size: "34x34" %> Fit Fee
+        </a>
+      <% end %>
+
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExample09">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <%= link_to "Home", pages_home_path, class: "nav-link" %>
-          </li>
+
           <% if user_signed_in? %>
             <li class="nav-item">
               <%= link_to "Customers", customers_path, class: "nav-link" %>
@@ -21,16 +28,18 @@
               <%= link_to "Payments", payments_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link btn btn-link" %>
+              <%= link_to 'Profile', edit_user_registration_path, class: 'nav-link' %>
             </li>
+            <li class="nav-item">
+              <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          
           <% else %>
             <li class="nav-item">
-              <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+              <%= link_to "Log in", new_user_session_path, class: "btn btn-success" %>
             </li>
           <% end %>
+
         </ul>
       </div>
     </div>
